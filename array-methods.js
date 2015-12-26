@@ -166,15 +166,17 @@ var stateSums = bankBalances.reduce(function(stateTotals, current) {
 
   var stateAbbrev = current.state;
   //why some are not rounding to nearest cent?
-  var stateAmount = parseFloat(current.amount);
+  var stateAmount = parseFloat(parseFloat(current.amount).toFixed(2));
 
   if(!(stateTotals.hasOwnProperty(stateAbbrev))){
     //IMP line! this refers to a key value pair; specific row; this state = this amount
     stateTotals[stateAbbrev] = stateAmount;
   } else{
-    stateTotals[stateAbbrev] += Math.floor(stateAmount);
-
-
+    stateTotals[stateAbbrev] += stateAmount;
+    //adding to get new value, then rounding it, then need to return it back to object
+    //the if just sets it, the else adds it - rounds it - resets it *boom*
+    //need to pass stateTotals[stateAbbrev] through since its holding the new amount
+    stateTotals[stateAbbrev] = parseFloat((stateTotals[stateAbbrev]).toFixed(2));
   }
 
   //return previous (which is stateTotals) to keep code going for the next call
@@ -190,15 +192,27 @@ var stateSums = bankBalances.reduce(function(stateTotals, current) {
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = null;
-
+var lowerSumStates = [];
+//the way to iterate over an object below (vs array)
+  for (var key in stateSums){
+    if (stateSums[key] < 1000000){
+      lowerSumStates.push(key);
+    }
+  }
 /*
   set higherStateSums to be the sum of
     all amounts of every state
     where the sum of amounts in the state is
       greater than 1,000,000
  */
-var higherStateSums = null;
+var higherStateSums = 0;
+  for (var key in stateSums){
+    if (stateSums[key] > 1000000){
+      higherStateSums += stateSums[key];
+    }
+    //output is weird
+    // console.log(higherStateSums);
+  }
 
 /*
   set areStatesInHigherStateSum to be true if
@@ -214,6 +228,19 @@ var higherStateSums = null;
  */
 var areStatesInHigherStateSum = null;
 
+  var stateArray = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
+
+   if (stateArray.indexOf(stateSums) > -1){
+    return stateSums;
+   }
+    for (var key in stateSums){
+      if (stateSums[key] > 2550000){
+      areStatesInHigherStateSum = true;
+      } else{
+      areStatesInHigherStateSum = false;
+      }
+    }
+    // console.log(areStatesInHigherStateSum);
 /*
   set anyStatesInHigherStateSum to be true if
     any of these states have a sum of account values
@@ -227,7 +254,27 @@ var areStatesInHigherStateSum = null;
   false otherwise
  */
 var anyStatesInHigherStateSum = null;
+  var stateArray = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
 
+  if (stateArray.indexOf(stateSums) > -1){
+    return stateSums;
+  }
+    for (var key in stateSums) {
+      if (stateSums[key] > 2550000){
+        var statePassed = key.length;
+        console.log(statePassed);
+        if (statePassed < 1){
+          anyStatesInHigherStateSum = false;
+        } else {
+          anyStatesInHigherStateSum = true;
+        }
+      }
+      // if (statePassed < 1){
+      //   // anyStatesInHigherStateSum = false;
+      // } else{
+      //   anyStatesInHigherStateSum = true;
+      // }
+    }
 
 module.exports = {
   hundredThousandairs : hundredThousandairs,
