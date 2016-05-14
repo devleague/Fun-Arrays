@@ -5,12 +5,12 @@ var dataset = require('./dataset.json');
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
-var hundredThousandairs = [];
-var result = dataset.bankBalances.filter(function (elem, idx, arr){
+var hundredThousandairs = dataset.bankBalances.filter(function (elem, idx, arr){
   if (elem.amount > 100000.00){
-    hundredThousandairs.push(elem);
+    return elem;
   }
 });
+console.log(hundredThousandairs);
 
 /*
   set a new key for each object in bankBalances named `rounded`
