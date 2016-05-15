@@ -50,15 +50,20 @@ var roundedDollar = dataset.bankBalances
 var roundedDime = dataset.bankBalances
     .map(function (account, index, array){
       var roundedDimeAcc = {};
-      roundedDimeAcc.state = account.state;
       roundedDimeAcc.amount = Number(parseFloat(account.amount).toFixed(1));
+      roundedDimeAcc.state = account.state;
       return roundedDimeAcc;
 
 
     });
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
-var sumOfBankBalances = null;
+var sumOfBankBalances = dataset.bankBalances
+    .reduce(function (prev, curr, idx, arr){
+      // Number(parseFloat(curr.amount).toFixed(2));
+      return Math.round((prev + Number(curr.amount))*100)/100;
+
+    }, 0);
 
 /*
   set sumOfInterests to the sum of the 18.9% interest
