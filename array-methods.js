@@ -41,7 +41,12 @@ console.log(roundedDollar);
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = null;
+var roundedDime = dataset.bankBalances.map(function (elem, idx, arr) {
+  return {
+    amount: Number(parseFloat(elem.amount).toFixed(1)),
+    state: elem.state};
+});
+console.log(roundedDime);
 
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
