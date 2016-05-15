@@ -9,7 +9,7 @@ var hundredThousandairs = dataset.bankBalances.filter(function (elem, idx, arr) 
   return elem.amount > 100000.00;
   }
 );
-console.log(hundredThousandairs);
+// console.log(hundredThousandairs);
 
 /*
   set a new key for each object in bankBalances named `rounded`
@@ -29,7 +29,7 @@ var roundedDollar = dataset.bankBalances.map(function (elem, idx, arr) {
     state: elem.state,
     rounded: Math.round(elem.amount)};
 });
-console.log(roundedDollar);
+// console.log(roundedDollar);
 
 /*
   set a the `amount` value for each object in bankBalances
@@ -46,11 +46,15 @@ var roundedDime = dataset.bankBalances.map(function (elem, idx, arr) {
     amount: Number(parseFloat(elem.amount).toFixed(1)),
     state: elem.state};
 });
-console.log(roundedDime);
-
+// console.log(roundedDime);
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
-var sumOfBankBalances = null;
+var sumOfBankBalances = dataset.bankBalances.reduce(function (prev, curr, idx, arr) {
+  // this will also return a number to the nearest cent
+  // return Number((prev + Number(parseFloat(curr.amount))).toFixed(2));
+  return Math.round((prev + Number(curr.amount))*100)/100;
+}, 0);
+console.log(sumOfBankBalances);
 
 /*
   set sumOfInterests to the sum of the 18.9% interest
