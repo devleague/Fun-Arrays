@@ -177,7 +177,7 @@ for (var key in stateSums){
     higherStateSums += Math.round(stateSums[key] * 100)/100;
   }
 }
-console.log(higherStateSums);
+// console.log(higherStateSums);
 
 /*
   set areStatesInHigherStateSum to be true if
@@ -192,6 +192,22 @@ console.log(higherStateSums);
   false otherwise
  */
 var areStatesInHigherStateSum = null;
+var stateArray = [];
+for (var key in stateSums){
+  var obj = {};
+  obj[key] = stateSums[key];
+  stateArray.push(obj);
+}
+console.log(stateArray);
+
+var areStatesInHigherStateSum = stateArray
+  .filter(function (elem, idx, arr) {
+    return exclude.indexOf(Object.keys(elem)[0]) !== -1;
+  })
+  .every(function (elem, idx, arr) {
+    return elem[Object.keys(elem)] > 2550000;
+  });
+console.log(areStatesInHigherStateSum);
 
 /*
   set anyStatesInHigherStateSum to be true if
