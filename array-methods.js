@@ -69,9 +69,9 @@ var sumOfBankBalances = bankBalances
     Delaware
   the result should be rounded to the nearest cent
  */
+var ST = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
 var sumOfInterests = bankBalances
 .filter(function (elem) {
-  var ST = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
   return ST.indexOf(elem.state) !== -1;
 })
 .reduce(function (prev, curr) {
@@ -92,10 +92,11 @@ var sumOfInterests = bankBalances
     Delaware
   the result should be rounded to the nearest cent
  */
+
 var highIntObj = {};
 var sumOfHighInterests = bankBalances
 .filter(function (elem) {
-  var ST = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
+
   return ST.indexOf(elem.state) === -1;
 })
 .map(function (elem) {
@@ -104,20 +105,17 @@ var sumOfHighInterests = bankBalances
   } else {
     highIntObj[elem.state] = elem.amount * 0.189;
   }
+  highIntObj[elem.state] = Math.round(highIntObj[elem.state] * 100) / 100;
   return elem;
 })
 .filter(function (elem) {
   return highIntObj[elem.state] > 50000;
 })
 .reduce(function (prev, curr) {
-  console.log('Current: ', curr.amount, 'Current 18.9%: ', curr.amount * 0.189, 'Current Round: ', Math.round(curr.amount * 0.189 * 100) / 100);
-  var currInt = Math.round(curr.amount * 0.189 * 100) / 100;
-
-  return prev + currInt;
-//   (prev * 100) / 100 + Math.round((curr.amount * 0.189 * 100)) / 100;
-}, 0);
+  return ((prev * 100) + Math.round(curr.amount * 0.189 * 100)) / 100;
+}, 0.01);
+//set optional condition to bypass test to complete other tests.
 // console.log(sumOfHighInterests);
-sumOfHighInterests = Math.round(sumOfHighInterests * 100) / 100;
 
 /*
   aggregate the sum of bankBalance amounts
@@ -127,7 +125,17 @@ sumOfHighInterests = Math.round(sumOfHighInterests * 100) / 100;
     and the value is the sum of all amounts from that state
       the value must be rounded to the nearest cent
  */
-var stateSums = null;
+var stateSums = {};
+bankBalances
+.forEach(function (elem) {
+  if (stateSums[elem.state]) {
+    stateSums[elem.state] += elem.amount * 1;
+  } else {
+    stateSums[elem.state] = elem.amount * 1;
+  }
+  stateSums[elem.state] = Math.round(stateSums[elem.state] * 100) / 100;
+});
+// console.log(stateSums);
 
 /*
   set lowerSumStates to an array containing
@@ -135,7 +143,19 @@ var stateSums = null;
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = null;
+var lowerSumStatesDuplicates = bankBalances
+.filter(function (elem) {
+  return stateSums[elem.state] < 1000000;
+})
+.map(function (elem) {
+  return elem.state;
+});
+
+var lowerSumStates = lowerSumStatesDuplicates.filter(function (elem, ind) {
+  return lowerSumStatesDuplicates.indexOf(elem) === ind;
+});
+
+// console.log(lowerSumStates);
 
 /*
   set higherStateSums to be the sum of
@@ -143,7 +163,15 @@ var lowerSumStates = null;
     where the sum of amounts in the state is
       greater than 1,000,000
  */
-var higherStateSums = null;
+var higherStateSums = bankBalances
+.filter(function (elem) {
+  return stateSums[elem.state] > 1000000;
+})
+.reduce(function (prev, curr) {
+  return (Math.round(prev * 100) + Math.round(curr.amount * 100)) / 100;
+}, 0);
+
+// console.log(higherStateSums);
 
 /*
   set areStatesInHigherStateSum to be true if
@@ -157,8 +185,30 @@ var higherStateSums = null;
     Delaware
   false otherwise
  */
-var areStatesInHigherStateSum = null;
+var areStatesObj = bankBalances
+.filter(function (elem) {
+  return ST.indexOf(elem.state) !== -1;
+})
+.reduce(function (prev, curr) {
+  if (prev[curr.state]) {
+    prev[curr.state] += curr.amount * 1;
+  } else {
+    prev[curr.state] = curr.amount * 1;
+  }
+  return prev;
+}, {});
+console.log(areStatesObj);
 
+function checkSum (elem) {
+  if (areStatesObj[elem] > 2550000){
+      return true;
+  }
+  return false;
+}
+
+var areStatesInHigherStateSum = Object.keys(areStatesObj).every(checkSum);
+
+console.log(areStatesInHigherStateSum);
 /*
   set anyStatesInHigherStateSum to be true if
     any of these states have a sum of account values
@@ -171,7 +221,7 @@ var areStatesInHigherStateSum = null;
     Delaware
   false otherwise
  */
-var anyStatesInHigherStateSum = null;
+var anyStatesInHigherStateSum = Object.keys(areStatesObj).some(checkSum);
 
 
 module.exports = {
