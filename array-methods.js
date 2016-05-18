@@ -144,12 +144,12 @@ var sortStates = dataset
       stateSums[elem.state] = Math.round(elem.amount * 100)/100;
     }
   });
-console.log(sortStates);
+// console.log(sortStates);
 
 for (var key in stateSums){
   stateSums[key] = Math.round(stateSums[key] * 100)/100;
 }
-console.log(stateSums);
+// console.log(stateSums);
 
 /*
   set lowerSumStates to an array containing
@@ -157,7 +157,13 @@ console.log(stateSums);
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = null;
+var lowerSumStates = [];
+for (var key in stateSums){
+  if (stateSums[key] < 1000000){
+    lowerSumStates.push(key);
+  }
+}
+console.log(lowerSumStates);
 
 /*
   set higherStateSums to be the sum of
