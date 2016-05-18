@@ -79,7 +79,7 @@ var sumOfInterests = dataset
   .reduce(function (prev, curr) {
     return Math.round((prev + Number(curr))*100)/100;
   }, 0);
-console.log(sumOfInterests);
+// console.log(sumOfInterests);
 
 /*
   set sumOfHighInterests to the sum of the 18.9% interest
@@ -95,8 +95,36 @@ console.log(sumOfInterests);
     Delaware
   the result should be rounded to the nearest cent
  */
-var sumOfHighInterests = null;
+var stateInterests = {};
+var exclude = ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'];
+var sumOfHighInterests = dataset
+  .bankBalances
+  .filter(function (elem, idx, arr) {
+    return exclude.indexOf(elem.state) === -1;
+  })
+  .map(function (elem, ind, arr){
+    return {
+      interest: Math.round((elem.amount * 0.189)*100)/100,
+      state: elem.state
+    };
+  })
+  .forEach(function (elem, idx, arr) {
+    if (stateInterests[elem.state]){
+      stateInterests[elem.state] += Math.round(elem.interest *100)/100;
+    }else{
+      stateInterests[elem.state] = Math.round(elem.interest *100)/100;
+    }
+  });
+console.log(sumOfHighInterests);
+console.log(stateInterests);
 
+var sumOfHighInterests = 0.01;
+for (var key in stateInterests){
+  if (stateInterests[key] > 50000){
+    sumOfHighInterests +=stateInterests[key];
+  }
+}
+console.log(sumOfHighInterests);
 /*
   aggregate the sum of bankBalance amounts
   grouped by state
