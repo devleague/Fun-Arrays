@@ -100,12 +100,13 @@ var result = checkForOtherStates.reduce(function(prev, curr, idx, array){
 },{});
 var keys = Object.keys(result);
 var sumOfHighInterests = 0;
-for(var i = 0; i < keys.length; i++){
-  if(result[keys[i]] > 50000){
-    sumOfHighInterests += result[keys[i]];
-  }
-  sumOfHighInterests = Math.round(sumOfHighInterests*100)/100;
-}
+sumOfHighInterests = keys.reduce(function(prev, curr, idx, array){
+    if(result[keys[idx]] > 50000){
+      sumOfHighInterests += result[keys[idx]];
+    }
+    sumOfHighInterests = Math.round(sumOfHighInterests*100)/100;
+    return sumOfHighInterests;
+},0);
 
 /*
   aggregate the sum of bankBalance amounts
@@ -131,13 +132,11 @@ var stateSums = dataset.bankBalances.reduce(function(prev, curr, idx, array){
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = [];
+// var lowerSumStates = [];
 var stateSumKeys = Object.keys(stateSums);
-for(var i = 0; i < stateSumKeys.length; i++){
-  if(stateSums[stateSumKeys[i]] < 1000000){
-      lowerSumStates.push(stateSumKeys[i]);
-  }
-}
+var lowerSumStates = stateSumKeys.filter(function(element, idx, array){
+    return stateSums[stateSumKeys[idx]] < 1000000;
+});
 
 /*
   set higherStateSums to be the sum of
@@ -146,11 +145,12 @@ for(var i = 0; i < stateSumKeys.length; i++){
       greater than 1,000,000
  */
 var higherStateSums = 0;
-for(var i = 0; i < stateSumKeys.length; i++){
-  if(stateSums[stateSumKeys[i]] > 1000000){
-      higherStateSums  += stateSums[stateSumKeys[i]];
-  }
-}
+higherStateSums = stateSumKeys.reduce(function(prev, curr, idx, array){
+    if(stateSums[stateSumKeys[idx]] > 1000000){
+      higherStateSums += stateSums[stateSumKeys[idx]];
+    }
+    return higherStateSums;
+},0);
 
 /*
   set areStatesInHigherStateSum to be true if
