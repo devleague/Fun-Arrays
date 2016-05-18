@@ -163,7 +163,7 @@ for (var key in stateSums){
     lowerSumStates.push(key);
   }
 }
-console.log(lowerSumStates);
+// console.log(lowerSumStates);
 
 /*
   set higherStateSums to be the sum of
@@ -172,6 +172,12 @@ console.log(lowerSumStates);
       greater than 1,000,000
  */
 var higherStateSums = null;
+for (var key in stateSums){
+  if (stateSums[key] > 1000000){
+    higherStateSums += Math.round(stateSums[key] * 100)/100;
+  }
+}
+console.log(higherStateSums);
 
 /*
   set areStatesInHigherStateSum to be true if
