@@ -198,7 +198,7 @@ for (var key in stateSums){
   obj[key] = stateSums[key];
   stateArray.push(obj);
 }
-console.log(stateArray);
+// console.log(stateArray);
 
 var areStatesInHigherStateSum = stateArray
   .filter(function (elem, idx, arr) {
@@ -207,7 +207,7 @@ var areStatesInHigherStateSum = stateArray
   .every(function (elem, idx, arr) {
     return elem[Object.keys(elem)] > 2550000;
   });
-console.log(areStatesInHigherStateSum);
+// console.log(areStatesInHigherStateSum);
 
 /*
   set anyStatesInHigherStateSum to be true if
@@ -221,7 +221,14 @@ console.log(areStatesInHigherStateSum);
     Delaware
   false otherwise
  */
-var anyStatesInHigherStateSum = null;
+var anyStatesInHigherStateSum = stateArray
+  .filter(function (elem, idx, arr) {
+    return exclude.indexOf(Object.keys(elem)[0]) !== -1;
+  })
+  .some(function (elem, idx, arr) {
+    return elem[Object.keys(elem)] > 2550000;
+  });
+console.log(anyStatesInHigherStateSum);
 
 
 module.exports = {
