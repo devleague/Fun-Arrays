@@ -108,7 +108,6 @@ var sumOfHighInterests = dataset.bankBalances
   })
       .map(function (elem, idx, arr){
         if (highInt[elem.state]){
-
           highInt[elem.state] += Number(parseFloat(elem.amount).toFixed(1));
         }else{
           highInt[elem.state] = elem.amount * 0.189;
@@ -123,13 +122,6 @@ var sumOfHighInterests = dataset.bankBalances
             return Math.round((prev + parseFloat(curr.amount) * 0.189) * 100)/100;
           }, 0.01);
 
-
-
-
-
-
-
-
 /*
   aggregate the sum of bankBalance amounts
   grouped by state
@@ -138,7 +130,18 @@ var sumOfHighInterests = dataset.bankBalances
     and the value is the sum of all amounts from that state
       the value must be rounded to the nearest cent
  */
-var stateSums = null;
+
+var stateSums = {};
+dataset.bankBalances
+  .map(function (elem){
+    if (stateSums[elem.state]){
+      stateSums[elem.state] += elem.amount;
+    }else{
+      stateSums[elem.state] = elem.amount;
+      stateSums[elem.state] = Math.round(stateSums[elem.state] * 100)/100;
+    }
+      return elem;
+  });
 
 /*
   set lowerSumStates to an array containing
