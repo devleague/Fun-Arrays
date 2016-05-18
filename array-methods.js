@@ -115,8 +115,8 @@ var sumOfHighInterests = dataset
       stateInterests[elem.state] = Math.round(elem.interest *100)/100;
     }
   });
-console.log(sumOfHighInterests);
-console.log(stateInterests);
+// console.log(sumOfHighInterests);
+// console.log(stateInterests);
 
 var sumOfHighInterests = 0.01;
 for (var key in stateInterests){
@@ -124,7 +124,8 @@ for (var key in stateInterests){
     sumOfHighInterests +=stateInterests[key];
   }
 }
-console.log(sumOfHighInterests);
+// console.log(sumOfHighInterests);
+
 /*
   aggregate the sum of bankBalance amounts
   grouped by state
@@ -133,7 +134,22 @@ console.log(sumOfHighInterests);
     and the value is the sum of all amounts from that state
       the value must be rounded to the nearest cent
  */
-var stateSums = null;
+var stateSums = {};
+var sortStates = dataset
+  .bankBalances
+  .forEach(function (elem, idx, arr) {
+    if (stateSums[elem.state]){
+      stateSums[elem.state] += Math.round(elem.amount * 100)/100;
+    }else{
+      stateSums[elem.state] = Math.round(elem.amount * 100)/100;
+    }
+  });
+console.log(sortStates);
+
+for (var key in stateSums){
+  stateSums[key] = Math.round(stateSums[key] * 100)/100;
+}
+console.log(stateSums);
 
 /*
   set lowerSumStates to an array containing
