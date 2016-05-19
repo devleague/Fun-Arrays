@@ -5,12 +5,19 @@ var dataset = require('./dataset.json');
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
-var hundredThousandairs = null;
+
+var money = [];
+ dataset.bankBalances.forEach(function(element, index, array){
+  if(parseFloat(element.amount) > 100000)
+    money.push(element);
+
+});
+var hundredThousandairs = money;
 
 /*
   set a new key for each object in bankBalances named `rounded`
   the value of this key will be the `amount` rounded to the nearest dollar
-  example 
+  example
     {
       "amount": "134758.44",
       "state": "HI",
@@ -23,7 +30,7 @@ var roundedDollar = null;
 /*
   set a the `amount` value for each object in bankBalances
   to the value of `amount` rounded to the nearest 10 cents
-  example 
+  example
     {
       "amount": 134758.4,
       "state": "HI"
@@ -77,14 +84,14 @@ var stateSums = null;
 
 /*
   set lowerSumStates to an array containing
-  only the two letter state abbreviation of each state 
+  only the two letter state abbreviation of each state
   where the sum of amounts in the state is
     less than 1,000,000
  */
 var lowerSumStates = null;
 
 /*
-  set higherStateSums to be the sum of 
+  set higherStateSums to be the sum of
     all amounts of every state
     where the sum of amounts in the state is
       greater than 1,000,000
