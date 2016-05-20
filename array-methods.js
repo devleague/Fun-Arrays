@@ -25,7 +25,15 @@ var hundredThousandairs = money;
     }
   assign the resulting array to `roundedDollar`
 */
-var roundedDollar = null;
+  var roundedDollar = dataset.bankBalances.map(function(element, index, array){
+    var account = {
+        amount:element.amount,
+        state: element.state,
+        rounded:  Math.round(parseFloat(element.amount))
+    };
+        return account;
+  });
+
 
 /*
   set a the `amount` value for each object in bankBalances
