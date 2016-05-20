@@ -148,8 +148,10 @@ var sumOfHighInterests = total;
     and the value is the sum of all amounts from that state
       the value must be rounded to the nearest cent
  */
-var stateSums = null;
-
+ for (var obj in noStates) {
+  noStates[obj]=Math.round(noStates[obj]  * 100) / 100;
+}
+var stateSums = noStates;
 /*
   set lowerSumStates to an array containing
   only the two letter state abbreviation of each state
