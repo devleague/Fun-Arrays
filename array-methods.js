@@ -45,7 +45,15 @@ var hundredThousandairs = money;
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = null;
+
+var roundedDime = dataset.bankBalances.map(function(element, index, array){
+    var account = {
+        amount: parseFloat(Math.max( Math.round(element.amount * 10) / 10).toFixed(1)),
+        state: element.state,
+    };
+        return account;
+  });
+
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
 var sumOfBankBalances = null;
