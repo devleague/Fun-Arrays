@@ -218,7 +218,7 @@ var areStatesInHigherStateSum = areStates;
  var anyStates = false;
  if(theStatesCheck > 0)
   anyStates = true;
-var anyStatesInHigherStateSum = true;
+var anyStatesInHigherStateSum = anyStates;
 
 module.exports = {
   hundredThousandairs : hundredThousandairs,
