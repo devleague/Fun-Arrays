@@ -74,8 +74,20 @@ var sumOfBankBalances =    parseFloat(sum.toFixed(2));
     Delaware
   the result should be rounded to the nearest cent
  */
-var sumOfInterests = null;
 
+var ISUM = 0;
+var states = ['WI','IL','WY','OH','GA','DE'];
+var sumStates = dataset.bankBalances.filter(function(ele){
+ return states.indexOf(ele.state) !== -1;
+});
+
+sumStates.forEach(function(element,index,array){
+
+var dolla =   parseFloat(Math.max( Math.round(element.amount * 100) / 100));
+ISUM +=  Math.round(dolla * 0.189 * 100) / 100;
+});
+
+var sumOfInterests = parseFloat(ISUM.toFixed(2));
 /*
   set sumOfHighInterests to the sum of the 18.9% interest
   for all amounts in bankBalances
