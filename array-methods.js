@@ -158,7 +158,13 @@ var stateSums = noStates;
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = null;
+ var lowestSum = [];
+  for (var obj in noStates) {
+    if(noStates[obj] < 1000000)
+      lowestSum.push(obj);
+}
+var lowerSumStates = lowestSum;
+
 
 /*
   set higherStateSums to be the sum of
