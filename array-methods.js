@@ -215,8 +215,10 @@ var areStatesInHigherStateSum = areStates;
     Delaware
   false otherwise
  */
-var anyStatesInHigherStateSum = null;
-
+ var anyStates = false;
+ if(theStatesCheck > 0)
+  anyStates = true;
+var anyStatesInHigherStateSum = true;
 
 module.exports = {
   hundredThousandairs : hundredThousandairs,
