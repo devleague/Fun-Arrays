@@ -192,7 +192,16 @@ var higherStateSums = highestSum;
     Delaware
   false otherwise
  */
-var areStatesInHigherStateSum = null;
+ var theStatesCheck = 0;
+  for (var obj in noStates) {
+    if(obj === 'WI' || obj === 'IL' || obj === 'WY' || obj === 'OH' || obj === 'GA' || obj === 'DE')
+      if(noStates[obj] > 2550000)
+        theStatesCheck++;
+}
+var areStates = false;
+if(theStatesCheck === 6)
+  areStates = true;
+var areStatesInHigherStateSum = areStates;
 
 /*
   set anyStatesInHigherStateSum to be true if
