@@ -102,7 +102,43 @@ var sumOfInterests = parseFloat(ISUM.toFixed(2));
     Delaware
   the result should be rounded to the nearest cent
  */
-var sumOfHighInterests = null;
+var noStates = dataset.bankBalances.reduce(function (prev, curr, idx, arr) {
+  if (prev[curr.state]) {
+  } else {
+    prev[curr.state] = 0;
+  }
+  return prev;
+},{});
+
+var total = 0;
+for (var obj in noStates) {
+  dataset.bankBalances.forEach(function(element,index, array){
+  if(element.state == obj)
+    noStates[obj] += parseFloat(element.amount);
+});
+}
+
+
+
+var highStates = [];
+for( var obj in noStates){
+  if(obj !== 'WI' && obj !== 'IL' && obj !== 'WY' && obj !== 'OH' && obj !== 'GA' && obj !== 'DE'){
+    var goodStates = {
+    state: obj,
+    amount: noStates[obj]
+    };
+    highStates.push(goodStates);
+  }
+}
+highStates.forEach(function(element,index,array){
+    var dolla =Math.round(element.amount * 0.189 * 100) / 100;
+  if(dolla > 50000)
+    total += dolla;
+});
+total = Math.round(total * 100) / 100;
+
+
+var sumOfHighInterests = total;
 
 /*
   aggregate the sum of bankBalance amounts
