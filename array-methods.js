@@ -172,7 +172,13 @@ var lowerSumStates = lowestSum;
     where the sum of amounts in the state is
       greater than 1,000,000
  */
-var higherStateSums = null;
+  var highestSum = 0;
+  for (var obj in noStates) {
+    if(noStates[obj] > 1000000)
+      highestSum += noStates[obj];
+}
+var higherStateSums = highestSum;
+
 
 /*
   set areStatesInHigherStateSum to be true if
