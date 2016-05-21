@@ -1,5 +1,4 @@
 var dataset = require('./dataset.json');
-debugger;
 /*
   create an array with accounts from bankBalances that are
   greater than 100000.00
@@ -131,17 +130,16 @@ var sumOfHighInterests = dataset.bankBalances
       the value must be rounded to the nearest cent
  */
 
-var stateSums = {};
-dataset.bankBalances
-  .map(function (elem){
-    if (stateSums[elem.state]){
-      stateSums[elem.state] += elem.amount;
+var stateSums = dataset.bankBalances
+  .reduce(function (prev, curr, idx, arr){
+    if (prev[curr.state]){
+      prev[curr.state] += prev[curr.state];
+      prev[curr.state] = Math.round(prev[curr.state] * 100)/100;
     }else{
-      stateSums[elem.state] = elem.amount;
-      stateSums[elem.state] = Math.round(stateSums[elem.state] * 100)/100;
+      prev[curr.state] = curr.amount;
     }
-      return elem;
-  });
+    return prev;
+  },{});
 
 /*
   set lowerSumStates to an array containing
