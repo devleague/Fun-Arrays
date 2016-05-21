@@ -132,16 +132,19 @@ function groupStates(prev, curr, index, array) {
 var groupStatesArray = Object.keys(groupedStates).map(function(key) {
   return groupedStates[key];
 });
-var sumOfHighInterests = 7935913.99;
+//console.log(groupStatesArray);
+//var sumOfHighInterests = 7935913.99;
 
-// var sumOfHighInterests = groupStatesArray
-//                         .filter(function(elem) {
-//                           //console.log("Checking if " + (element.amount * 0.189) + " is greater than "  + 50000);
-//                           return ((elem.amount * 0.189).toFixed(2) * 1) > 50000;
-//                         })
-//                         .reduce(function(prev, curr, index, array) {
-//                           return (prev + (curr.amount * 0.189)).toFixed(2) * 1;
-//                         }, 0);
+var sumOfHighInterests = groupStatesArray
+                        .filter(function(elem, index, array) {
+                          console.log("Checking if " + (array[index] * 0.189) + " is greater than "  + 50000);
+                          return ((array[index] * 0.189).toFixed(2) * 1) > 50000;
+                        })
+                        .reduce(function(prev, curr, index, array) {
+                          console.log("prev: " + prev + " array[index]: " + array[index]);
+                          return (prev + (array[index] * 0.189)).toFixed(2) * 1;
+                        }, 0);
+console.log(sumOfHighInterests);
 
 /*
   aggregate the sum of bankBalance amounts
@@ -209,6 +212,8 @@ Object.getOwnPropertyNames(sumStates).forEach(function(elem, index, arr) {
       greater than 1,000,000
  */
 var higherStateSums = 0;
+
+
 Object.getOwnPropertyNames(stateSums).forEach(function (elem) {
   if(stateSums[elem] > 1000000) {
     higherStateSums+=stateSums[elem];
@@ -229,7 +234,41 @@ higherStateSums = higherStateSums.toFixed(2) * 1;
     Delaware
   false otherwise
  */
-var areStatesInHigherStateSum = null;
+var areStatesInHigherStateSum = true;
+console.log(sumStates);
+var someStates = dataset
+                    .bankBalances
+                    .filter(function(element) {
+                      return element.state === 'WI' || element.state === 'IL'|| element.state === 'WY' || element.state === 'OH'|| element.state === 'GA'|| element.state === 'DE';
+                    });
+var sumSomeStates = someStates
+                    .reduce(function (prev, curr, index, array) {
+                    if(prev[curr.state]) {
+                      // if key exists
+                      //console.log("Adding " + (prev[curr.state] / 1) + " to " + (curr.amount / 1));
+                      //prev[curr.state] = (prev[curr.state] / 1  + curr.amount / 1).toFixed(2) * 1;
+                      prev[curr.state] = (prev[curr.state] / 1  + curr.amount / 1).toFixed(2) * 1;
+                      //console.log("prev[curr.state] = " + (prev[curr.state]));
+                      //console.log("prev[curr.amount] = " + (prev[curr.amount] / 1));
+
+                    }
+                    else {
+                      //if key does not exist
+                      prev[curr.state] = (curr.amount / 1).toFixed(2) * 1;
+                      //console.log("prev[curr.state] = " + (prev[curr.state]));
+                      //console.log("prev[curr.amount] = " + (prev[curr.amount] / 1));
+
+                      //prev[curr.amount] = (curr.amount / 1).toFixed(2) * 1;
+                    }
+                    return prev;
+                    }, {});
+
+Object.getOwnPropertyNames(sumSomeStates).forEach(function (elem) {
+  if(sumSomeStates[elem] < 2550000) {
+    areStatesInHigherStateSum = false;
+  }
+});
+
 
 /*
   set anyStatesInHigherStateSum to be true if
@@ -243,8 +282,12 @@ var areStatesInHigherStateSum = null;
     Delaware
   false otherwise
  */
-var anyStatesInHigherStateSum = null;
-
+var anyStatesInHigherStateSum = false;
+Object.getOwnPropertyNames(sumSomeStates).forEach(function (elem) {
+  if(sumSomeStates[elem] < 2550000) {
+    anyStatesInHigherStateSum = true;
+  }
+});
 
 module.exports = {
   hundredThousandairs : hundredThousandairs,
