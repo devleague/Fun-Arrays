@@ -130,13 +130,14 @@ var sumOfHighInterests = dataset.bankBalances
       the value must be rounded to the nearest cent
  */
  var stateSums = dataset.bankBalances
-  .reduce(function(prev, curr, idx, array){
-    if(prev[curr.state]){
+  .reduce(function (prev, curr, idx, array){
+    if (prev[curr.state]){
       prev[curr.state] += Number(parseFloat(curr.amount).toFixed(2));
       prev[curr.state] = Math.round(prev[curr.state]*100)/100;
     }else{
       prev[curr.state] = Number(parseFloat(curr.amount).toFixed(2));
     }
+    console.log(prev);
     return prev;
 },{});
 
@@ -146,7 +147,12 @@ var sumOfHighInterests = dataset.bankBalances
   where the sum of amounts in the state is
     less than 1,000,000
  */
-var lowerSumStates = null;
+var lowerSumStates = dataset.bankBalances
+  .filter(function (elem, idx, arr){
+    return stateSums[elem.state] < 1000000;
+
+  }, []);
+
 
 /*
   set higherStateSums to be the sum of
