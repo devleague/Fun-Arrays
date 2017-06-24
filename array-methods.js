@@ -86,18 +86,18 @@ var sumOfInterests = null;
 var stateSums = null;
 
 /*
-  from each of the following states:
+  Exclude the following states from your filter:
     Wisconsin
     Illinois
     Wyoming
     Ohio
     Georgia
     Delaware
-  take each `amount` and add 18.9% interest to it
-  only sum values greater than 50,000 and save it to `sumOfInterests`
+
+  Take each `amount` returned from the filter and add 18.9% interest to it. If the added amount is over 50,000, sum the `amounts` and save result to `sumOfHighInterests`.
 
   note: During your summation (
-    if at any point durig your calculation where the number looks like `2486552.9779399997`
+    If at any point during your calculation where the number looks like `2486552.9779399997`
     round this number to the nearest 10th of a cent before moving on.
   )
  */
