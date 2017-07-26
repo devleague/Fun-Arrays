@@ -4,107 +4,352 @@ chai.should();
 var arrayMethods = require('../array-methods');
 
 describe('Array Methods', function() {
-  describe('hundredThousandairs', function() {
-    it('should be an array with accounts from bankBalances that are greater than 100000', function() {
-      arrayMethods.hundredThousandairs.should.have.length(93);
-      arrayMethods.hundredThousandairs.every(function (account){ return account.amount > 100000; }).should.be.true;
+  describe('evenNumbers', function() {
+    it('should be an array with even numbers', function() {
+      arrayMethods.evenNumbers.should.deep.equal([
+        194,
+        158,
+        150,
+        14,
+        166,
+        2,
+        116,
+        130,
+        52,
+        66,
+        120,
+        22,
+        158,
+        24,
+        70,
+        196,
+        142,
+        182,
+        186,
+        122,
+        140,
+        68,
+        80,
+        2,
+        142,
+        40,
+        108,
+        96,
+        72,
+        174,
+        22
+      ]);
     });
   });
-
-  describe('datasetWithRoundedDollar', function() {
-    it('should be an array of accounts with an added key `rounded`', function() {
-      arrayMethods.datasetWithRoundedDollar.should.have.length(100);
-      arrayMethods.datasetWithRoundedDollar.every(function (account){ return account.hasOwnProperty('rounded'); }).should.be.true;
-    });
-
-    it('each accounts `rounded` value should be rounded to the nearest dollar', function() {
-      arrayMethods.datasetWithRoundedDollar[0].rounded.should.be.equal(822371);
-      arrayMethods.datasetWithRoundedDollar[7].rounded.should.be.equal(231272);
-      arrayMethods.datasetWithRoundedDollar[9].rounded.should.be.equal(683737);
-      arrayMethods.datasetWithRoundedDollar[10].rounded.should.be.equal(913216);
-      arrayMethods.datasetWithRoundedDollar[99].rounded.should.be.equal(196086);
+  describe('evenSalaries', function() {
+    it('should be an array with even numbers', function() {
+      arrayMethods.evenSalaries.should.deep.equal([40502.43,40671.59,40807.93,40937.71,41075.86,41589.89,42034.05,42266.31,42904.09,43016.08,43569.99,43586.02,43859.72,44073.91,44399.6,44623.78,44672.35,44761.54,45728.28,45827.83,46364.19,46500.16,46647.66,46710.36,48213.85,48730.13,48760.09,48904.22,49516.2,49583.87,49679.71,49904.48,50207.67,50487.56,50826.3,51044.26,51071.56,51745.71,51845.85,52148.03,52218.45,52550.46,52663.88,52666.2,52986.26,53763.88,53809.91,54535.99,55259.59,55263.59,55379.95,56137.53,56671.86,56802.38,56813.68,56932.26,57200.3,57873.99,57961.64,58009.94,58085.51,58901.69,58928.05,59113.93,59902.13,60047.97,60209.69,60939.98,60942.04,61078.4,61431.89,61589.6,62438.13,62670.09,63014.44,63273.57,63404.24,63572.23,63728.03,64256.32,64522.45,64581.72,65211.55,65719.96,66012.13,66301.84,67086.2,67377.85,67541.88,68465.63,69357.6,69434.36,69453.94,69978.29,70197.89,70215.77,70574.31,70692.23,70888.21,70985.56,71285.5,71384.21,71433.62,71503.53,73276.45,73466.37,73535.8,74260.27,74622.46,75717.51,75813.95,76253.51,76723.6,76937.63,77141.93,77746.07,80129.87,80205.56,81859.92,82168.24,82322.26,82332.2,82440.01,82811.92,84010.29,84252.01,84399.52,84731.58,84734.07,84735.76,84757.9,84984.39,85311.89,85489.59,86439.69,86898.02,86931.65,87138.16,87217.8,88263.99,88352.19,88403.6,89383.69,89504,89698.2,90212.11,90890.45,91175.82,91190.34,91464.31,91465.95,91595.69,91598.21,91599.53,92018.07,92208.29,92402.27,92489.92,92823.69,93063.66,93155.51,93462.36,93572.03,93627.97,94049.96,95110.07,95204.48,95526.05,96320.23,96416.16,96928.42,97156.49,98361.71,98492.12,99093.81,99541.72,99846.12,99961.72,100042.23,100054.2,100338.02,100385.54,100878.02,101289.65,101789.93,101978.49,102312.06,103540.14,103822.1,104001.82,104681.62,105900.4,106707.73,106806.13,107008.13,107734.05,107822.33,108260.18,108377.65,108446.15,108876.35,109601.65,109966.3,110058.39,110109.88,110240.29,111126.15,111240.43,112614.09,112787.59,113795.66,114292.4,114562.47,114700.26,114963.59,115492.37,116373.58,116426.31,116986.22,117431.96,117439.64,117807.92,117872.13,117939.96,118253.99,118468.2,118663.96,118696.23,118853.55,119238.31,119251.98,119368.03,120719.97,120841.55,120910.48,121119.83,121569.51,121620.45,121930.35,122711.81,123138.27,123248.24,123349.69,123685.58,124036.49,124258.38,124588.17,124604.07,124814.18,125222.37,125949.98,126777.67,127014.27,127181.86,127530.04,127606.34,127720.36,128879.61,129137.89,129388.21,130358.41,130510.45,130636.34,131109.91,131189.71,131566.49,132352.47,132698.47,133273.99,133317.79,133405.66,134339.52,134542.11,135068.05,135725.85,136279.52,136328.02,136603.96,136710.28,136747.9,137707.9,138938.05,139169.61,139527.98,140115.91,140156.01,140206.14,140458.43,140645.54,140702.21,140816.29,141043.64,141515.66,141667.81,141821.5,141918.44,142148.27,142337.61,142661.66,143085.86,144320.11,145505.69,145558.16,146077.97,146133.72,146788,147731.66,148607.82,148841.81,149649.51,149962.26,150364.09,150609.72,150680.47,150738.14,150985.6,151141.68,151559.96,151619.52,151767.78,151881.59,151949.73,152741.99,152956.43,152961.72,153007.96,153297.83,154199.91,154799.74,155250.47,155410.23,155433.83,155464.15,156228.26,156253.52,156351.85,156478.33,156543.53,156841.77,157564.33,157784.24,158326.23,158416.13,158583.71,159029.99,159069.88,159107.56,159142.28,159290.18,159305.57,159319.51,159763.69,159806.13,160106.38,160320.1,160703.73,160789.92,160796.1,160847.86,162154.29,162836.09,163947.79,164003.71,164510.06,165264.17,165502.45,165852.15,166282.21,166685.96,167246.01,167564.31,167789.75,168088.11,168847.5,169409.88,169426.18,170541.92,170805.81,171175.62,171257.54,171954.24,172431.5,172685.5,172759.88,172920.11,172932.4,173322.49,173698.37,173875.84,174227.54,174674.18,174702.29,174886.45,175085.65,175126.27,175960.45,176159.72,176527.58,176579.63,176716.48,177132.35,177300.25,177511.91,178067.58,178226.24,178425.56,178524.37,178724.06,178824.19,178825.81,178975.52,179286,179599.78,180596.39,180987.74,181352.09,181481.84,181811.71,181830.11,182192.05,182205.93,182650.21,182928.31,183293.51,183756.34,184007.83,184194.26,184431.59,185205.61,186053.72,186332.23,186434.35,186480.48,187259.59,187444.36,188191.78,188750.1,188856.28,188976.12,189183.68,189797.84,189864.04,189934.22,190156.24,190625.57,191055.83,191074.32,191215.66,191989.72,191998.03,192003.68,192012.44,192195.6,192513.88,193368.27,193471.64,193993.85,194920.43,195081.69,196029.82,196053.77,196063.71,196835.87,197006.15,197158.11,197314.26,197757.68,197968.03,198024.4,198099.99,198131.69,198134.38,198459.65,198540.3,199323.73,199512.13,5293795.83]);
     });
   });
-
-  describe('datasetWithRoundedDime', function() {
-    it('should be a new dataset of accounts with an added key `roundedDime`', function() {
-      arrayMethods.datasetWithRoundedDime.should.have.length(100);
-      arrayMethods.datasetWithRoundedDime.every(function (account){ return account.hasOwnProperty('amount'); }).should.be.true;
-      arrayMethods.datasetWithRoundedDime.every(function (account){ return account.hasOwnProperty('roundedDime'); }).should.be.true;
-
-      // should NOT have a property of `rounded`
-      arrayMethods.datasetWithRoundedDime.every(function (account){ return !account.hasOwnProperty('rounded'); }).should.be.true;
-    });
-
-    it('each account\'s `roundedDime` value should be the `amount` value rounded to the nearest dime', function() {
-      arrayMethods.datasetWithRoundedDime[0].roundedDime.should.be.equal(822370.7);
-      arrayMethods.datasetWithRoundedDime[7].roundedDime.should.be.equal(231272);
-      arrayMethods.datasetWithRoundedDime[99].roundedDime.should.be.equal(196085.9);
+  describe('divisibleByThree', function() {
+    it('should be false', function() {
+      arrayMethods.divisibleByThree.should.equal(false);
     });
   });
-
-  describe('sumOfBankBalances', function() {
-    it('should be the sum of all amounts in bankBalances, rounded to the nearest cent', function() {
-      arrayMethods.sumOfBankBalances.should.be.equal(55502603.02);
+  describe('youtubeEmails', function() {
+    it('should be an array containing 6 employees', function() {
+      arrayMethods.youtubeEmails.should.deep.equal([ { id: 354,
+        first_name: 'Donny',
+        last_name: 'Southby',
+        email: 'dsouthby9t@youtube.com',
+        gender: 'Male',
+        income: '54535.99',
+        company: 'Navistar International Corporation' },
+      { id: 763,
+        first_name: 'Murial',
+        last_name: 'Feldmann',
+        email: 'mfeldmannl6@youtube.com',
+        gender: 'Female',
+        income: '59735.06',
+        company: 'PowerShares KBW Premium Yield Equity REIT Portfolio' },
+      { id: 669,
+        first_name: 'Krishnah',
+        last_name: 'Markushkin',
+        email: 'kmarkushkinik@youtube.com',
+        gender: 'Male',
+        income: '84984.39',
+        company: 'First American Corporation (The)' },
+      { id: 515,
+        first_name: 'Jo-anne',
+        last_name: 'Mirams',
+        email: 'jmiramsea@youtube.com',
+        gender: 'Female',
+        income: '131109.91',
+        company: 'TerraForm Power, Inc.' },
+      { id: 161,
+        first_name: 'Delphine',
+        last_name: 'Aylesbury',
+        email: 'daylesbury4g@youtube.com',
+        gender: 'Female',
+        income: '150680.47',
+        company: 'The First of Long Island Corporation' },
+      { id: 606,
+        first_name: 'Ezri',
+        last_name: 'Shildrake',
+        email: 'eshildrakegt@youtube.com',
+        gender: 'Male',
+        income: '173870.71',
+        company: 'Power Integrations, Inc.' } ]);
     });
   });
+  describe('sortedByIncome', function() {
+    it('should be an array containing all employees with income, sorted by income', function() {
+      arrayMethods.sortedByIncome.slice(0,3).should.deep.equal([ { id: 23,
+        first_name: 'Gisela',
+        last_name: 'Garner',
+        email: 'ggarnerm@infoseek.co.jp',
+        gender: 'Female',
+        income: '40163.04',
+        company: 'Adams Diversified Equity Fund, Inc.' },
+      { id: 338,
+        first_name: 'Annalee',
+        last_name: 'Newbery',
+        email: 'anewbery9d@google.nl',
+        gender: 'Female',
+        income: '40237.41',
+        company: 'Banco Santander, S.A.' },
+      { id: 910,
+        first_name: 'Alvie',
+        last_name: 'Dayne',
+        email: 'adaynep9@yellowpages.com',
+        gender: 'Male',
+        income: '40394.99',
+        company: 'China Customer Relations Centers, Inc.' } ]);
 
-  describe('sumOfInterests', function() {
-    it('should be the sum the 18.9% interest for all amounts in bankBalances, in the selected states, rounded to the nearest cent', function() {
-      arrayMethods.sumOfInterests.should.be.equal(2504611.23);
+      arrayMethods.sortedByIncome.slice(-3).should.deep.equal([ { id: 583,
+        first_name: 'Dallas',
+        last_name: 'Crossland',
+        email: 'dcrosslandg6@elegantthemes.com',
+        gender: 'Male',
+        income: '199824.88',
+        company: 'St. Joe Company (The)' },
+      { id: 511,
+        first_name: 'Lemar',
+        last_name: 'Oswald',
+        email: 'loswalde6@noaa.gov',
+        gender: 'Male',
+        income: '199885.01',
+        company: 'SINOPEC Shangai Petrochemical Company, Ltd.' },
+      { id: 404,
+        first_name: 'Darth',
+        last_name: 'Lambda',
+        email: 'yourlackofmonadsisdisturbing@deathstar.net',
+        gender: 'Male',
+        income: '5293795.83',
+        company: 'Imperial Army of the Galactic Empire' } ]);
     });
   });
-
-  describe('stateSums', function() {
-    it('should be a hash table', function() {
-      chai.assert.isObject(arrayMethods.stateSums);
-    });
-
-    it('should have a key for each state', function() {
-      let stateKeys = Object.keys(arrayMethods.stateSums);
-      stateKeys.should.have.length(37);
-      stateKeys.should.include.members(['ME', 'WI', 'ID', 'HI']);
-    });
-
-    it('should have a keys with values being the sum for each state, rounded to the nearest cent', function() {
-      arrayMethods.stateSums.ME.should.be.equal(2783817.71);
-      arrayMethods.stateSums.WI.should.be.equal(2958669.19);
-      arrayMethods.stateSums.ID.should.be.equal(461647.46);
-      arrayMethods.stateSums.HI.should.be.equal(901770.4);
+  describe('largestValue', function() {
+    it('should be 196', function() {
+      arrayMethods.largestValue.should.equal(196);
     });
   });
-
-  describe('sumOfHighInterests', function() {
-    it('should be the sum the 18.9% interest for all amounts in bankBalances, where the amount of the sum of interests in that state is greater than 50,000, in the selected states, rounded to the nearest cent', function() {
-      arrayMethods.sumOfHighInterests.should.be.equal(7935913.99);
+  describe('longestEmail', function() {
+    it('should be \'yourlackofmonadsisdisturbing@deathstar.net\'', function() {
+      arrayMethods.longestEmail.should.equal('yourlackofmonadsisdisturbing@deathstar.net');
     });
   });
-
-  describe('lowerSumStates', function() {
-    it('should be an Array', function() {
-      chai.assert.isArray(arrayMethods.lowerSumStates);
-    });
-
-    it('should contain only abbreviations of states who have sums of amounts that are less than 1,000,000', function() {
-      arrayMethods.lowerSumStates.should.have.same.members([ 'MI', 'MD', 'IN', 'CA', 'MS', 'MT', 'MO', 'KY', 'AK', 'HI', 'ID' ]);
+  describe('evensThenOdds', function() {
+    it('should be an array beginning with all even numbers, then odd numbers', function() {
+      arrayMethods.evensThenOdds.should.deep.equal([ 194,
+      158,
+      150,
+      14,
+      166,
+      2,
+      116,
+      130,
+      52,
+      66,
+      120,
+      22,
+      158,
+      24,
+      70,
+      196,
+      142,
+      182,
+      186,
+      122,
+      140,
+      68,
+      80,
+      2,
+      142,
+      40,
+      108,
+      96,
+      72,
+      174,
+      22,
+      141,
+      115,
+      29,
+      195,
+      115,
+      149,
+      71,
+      143,
+      115,
+      157,
+      83,
+      149,
+      195,
+      121,
+      101,
+      107,
+      37,
+      81,
+      69,
+      99,
+      71,
+      165,
+      113,
+      63,
+      71,
+      173,
+      111,
+      33,
+      81,
+      117,
+      29,
+      35,
+      157 ]);
     });
   });
-
-  describe('higherStateSums', function() {
-    it('should be the sum of all amounts of every state, where the sum of amounts in the state is greater than 1,000,000', function() {
-      arrayMethods.higherStateSums.should.be.equal(48629878.25);
+  describe('employeesAlphaFirst', function() {
+    it('should be an array containing full names where the first name begins with the letter D, sorted alphabetically by first name', function() {
+      arrayMethods.employeesAlphaFirst.should.deep.equal([ 'Daisie Huckett',
+        'Dalila Donohoe',
+        'Dallas Crossland',
+        'Dallas Whelband',
+        'Dame Jertz',
+        'Dan Tappor',
+        'Dannie Hannond',
+        'Dante Lardeux',
+        'Darb Ketteridge',
+        'Daria Pedycan',
+        'Dario Milne',
+        'Darth Lambda',
+        'Darwin Hewlings',
+        'Dasie Vanyashkin',
+        'Davide Sigars',
+        'Davin Marchent',
+        'Davina Welton',
+        'Dawn Lukianov',
+        'Deanne Crinkley',
+        'Debera Everist',
+        'Deeann Viollet',
+        'Delainey Bus',
+        'Delmer McGibbon',
+        'Delmor D\'Hooghe',
+        'Deloris Broddle',
+        'Delphine Aylesbury',
+        'Demetri Merton',
+        'Denna Costar',
+        'Denny Hobgen',
+        'Derril Chaulk',
+        'Dewain Nussey',
+        'Dianne Capelle',
+        'Dilan MacKean',
+        'Dimitri Korda',
+        'Dinah Gimert',
+        'Dolores Pawels',
+        'Dominic Daintry',
+        'Dominique Risson',
+        'Donavon Galland',
+        'Donia Abby',
+        'Donica Mougeot',
+        'Donny Pinkard',
+        'Donny Southby',
+        'Doralin Upsale',
+        'Doralyn Laible',
+        'Dorice O\'Dreain',
+        'Dorri Gotch',
+        'Dorthy Ronald',
+        'Dory Dowgill',
+        'Dosi Sends',
+        'Dotti Alelsandrovich',
+        'Dru Danielsky',
+        'Drusilla Seager',
+        'Duff Stallworth',
+        'Duky Mc Elory',
+        'Dulcia Menicomb' ]);
     });
   });
-
-  describe('areStatesInHigherStateSum should be true if all of these states have a sum of account values greater than 2,550,000', function() {
-    it('should be the sum of all amounts of every state, where the sum of amounts in the state is greater than 1,000,000', function() {
-      arrayMethods.areStatesInHigherStateSum.should.be.false;
+  describe('employeesAlphaLast', function() {
+    it('should be an array containing full names where the first name begins with the letter D, sorted alphabetically by last name', function() {
+      arrayMethods.employeesAlphaLast.should.deep.equal([ 'Donia Abby',
+        'Dotti Alelsandrovich',
+        'Delphine Aylesbury',
+        'Deloris Broddle',
+        'Delainey Bus',
+        'Dianne Capelle',
+        'Derril Chaulk',
+        'Denna Costar',
+        'Deanne Crinkley',
+        'Dallas Crossland',
+        'Delmor D\'Hooghe',
+        'Dominic Daintry',
+        'Dru Danielsky',
+        'Dalila Donohoe',
+        'Dory Dowgill',
+        'Debera Everist',
+        'Donavon Galland',
+        'Dinah Gimert',
+        'Dorri Gotch',
+        'Dannie Hannond',
+        'Darwin Hewlings',
+        'Denny Hobgen',
+        'Daisie Huckett',
+        'Dame Jertz',
+        'Darb Ketteridge',
+        'Dimitri Korda',
+        'Doralyn Laible',
+        'Darth Lambda',
+        'Dante Lardeux',
+        'Dawn Lukianov',
+        'Dilan MacKean',
+        'Davin Marchent',
+        'Duky Mc Elory',
+        'Delmer McGibbon',
+        'Dulcia Menicomb',
+        'Demetri Merton',
+        'Dario Milne',
+        'Donica Mougeot',
+        'Dewain Nussey',
+        'Dorice O\'Dreain',
+        'Dolores Pawels',
+        'Daria Pedycan',
+        'Donny Pinkard',
+        'Dominique Risson',
+        'Dorthy Ronald',
+        'Drusilla Seager',
+        'Dosi Sends',
+        'Davide Sigars',
+        'Donny Southby',
+        'Duff Stallworth',
+        'Dan Tappor',
+        'Doralin Upsale',
+        'Dasie Vanyashkin',
+        'Deeann Viollet',
+        'Davina Welton',
+        'Dallas Whelband' ]);
     });
   });
-
-  describe('anyStatesInHigherStateSum should be true if any of these states have a sum of account values greater than 2,550,000', function() {
-    it('should be the sum of all amounts of every state, where the sum of amounts in the state is greater than 1,000,000', function() {
-      arrayMethods.anyStatesInHigherStateSum.should.be.true;
+  describe('highestPaid', function() {
+    it('should be an object with id, full_name, email, and company where the object represents the highest paid employee', function() {
+      arrayMethods.highestPaid.should.deep.equal({
+        id: 404,
+        email: 'yourlackofmonadsisdisturbing@deathstar.net',
+        company: 'Imperial Army of the Galactic Empire',
+        full_name: 'Darth Lambda'
+      });
     });
   });
 });
