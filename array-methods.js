@@ -7,50 +7,6 @@ var dataset = require('./dataset.json');
 */
 var hundredThousandairs = null;
 
-/*
-  DO NOT MUTATE DATA.
-
-  create a new dataset where each bank object is a new object.
-  `amount` and `state` values will be transferred to the new object.
-  This new object is different, you will add one new key of `rounded`
-
-  `rounded` value is `amount` rounded to the nearest dollar
-
-  Example:
-    {
-      "amount": "134758.44",
-      "state": "HI",
-      "rounded": 134758
-    }
-  assign the resulting new array to `datasetWithRoundedDollar`
-*/
-var datasetWithRoundedDollar = null;
-
-/*
-  DO NOT MUTATE DATA.
-
-  create a new dataset where each bank object is a new object.
-  `amount` and `state` values will be transferred to the new object.
-  This new object is different, you will add one new key of `roundedDime`
-
-  `roundedDime` value is `amount` rounded to the nearest 10th of a cent
-
-  Example 1
-    {
-      "amount": "134758.46",
-      "state": "HI"
-      "roundedDime": 134758.5
-    }
-  Example 2
-    {
-      "amount": "134758.44",
-      "state": "HI"
-      "roundedDime": 134758.4
-    }
-  assign the resulting new array to `roundedDime`
-*/
-var datasetWithRoundedDime = null;
-
 // set sumOfBankBalances to be the sum of all value held at `amount` for each bank object
 var sumOfBankBalances = null;
 
@@ -76,11 +32,11 @@ var sumOfInterests = null;
     the two letter state abbreviation
   and the value is:
     the sum of all amounts from that state
-    the value must be rounded to the nearest cent
+    the value must be rounded to the nearest dollar
 
   note: During your summation (
     if at any point durig your calculation where the number looks like `2486552.9779399997`
-    round this number to the nearest 10th of a cent before moving on.
+    round this number to the nearest dollar before moving on.
   )
  */
 var stateSums = null;
@@ -99,7 +55,7 @@ var stateSums = null;
 
   note: During your summation (
     if at any point durig your calculation where the number looks like `2486552.9779399997`
-    round this number to the nearest 10th of a cent before moving on.
+    round this number to the nearest dollar before moving on.
   )
  */
 var sumOfHighInterests = null;
@@ -153,8 +109,6 @@ var anyStatesInHigherStateSum = null;
 
 module.exports = {
   hundredThousandairs : hundredThousandairs,
-  datasetWithRoundedDollar : datasetWithRoundedDollar,
-  datasetWithRoundedDime : datasetWithRoundedDime,
   sumOfBankBalances : sumOfBankBalances,
   sumOfInterests : sumOfInterests,
   sumOfHighInterests : sumOfHighInterests,
