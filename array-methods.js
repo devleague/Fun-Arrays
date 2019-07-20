@@ -18,8 +18,8 @@ var sumOfBankBalances = null;
     Ohio
     Georgia
     Delaware
-  take each `amount` and add 18.9% interest to it rounded to the nearest dollar 
-  and then sum it all up into one value saved to `sumOfInterests`
+  take each `amount` and calculate 18.9% interest for that `amount` and round to the nearest cent
+  and then sum up all the interest calculations into one value and save that to `sumOfInterests`
  */
 var sumOfInterests = null;
 
